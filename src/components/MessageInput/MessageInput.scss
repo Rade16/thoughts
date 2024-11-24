@@ -1,0 +1,23 @@
+@use "../../scss/_variables.scss" as *;
+.messageInput {
+  padding: 20px;
+  border-radius: 15px;
+  background: #1b2730;
+  &__container {
+    display: flex;
+    gap: 20px;
+  }
+  &__avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  &__input {
+    flex-grow: 1;
+    background: #28343e;
+    border-radius: 20px;
+    padding: 0 20px;
+    height: 60px;
+  }
+}

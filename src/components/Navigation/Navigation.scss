@@ -1,0 +1,37 @@
+@use "../../scss/variables" as *;
+.navigation {
+  &__container {
+    display: flex;
+    align-items: center;
+    padding: 30px 40px;
+    height: 100px;
+  }
+
+  &__list {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-left: 210px;
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 15px;
+      border-radius: 30px;
+      background: $bg-element;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 19px;
+      color: $color;
+      cursor: pointer;
+    }
+  }
+}
+.active {
+  background: #ffffff;
+  color: #000;
+  .navigation__list-item-img {
+    filter: brightness(0) saturate(100%) invert(43%) sepia(76%) saturate(615%) hue-rotate(160deg) brightness(93%)
+      contrast(91%);
+  }
+}
