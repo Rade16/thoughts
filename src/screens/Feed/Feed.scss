@@ -1,0 +1,17 @@
+.feed{
+    &__container{
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 1fr 3fr 1fr;
+
+    }
+    &__messages{
+        justify-self: center;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    &__recommendations{
+      
+    }
+}

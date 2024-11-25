@@ -1,0 +1,17 @@
+@use "../../scss/variables" as *;
+.recommendations{
+    padding: 30px;
+    width: 350px;
+    height: 400px;
+    background: $bg-element;
+    border-radius: 15px;
+    &__title{
+        font-size: 24px;
+    }
+    &__list{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

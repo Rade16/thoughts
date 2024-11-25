@@ -1,12 +1,16 @@
 .profile {
   &__container {
-    padding: 0 30px;
-    display: flex;
-    gap: 30px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 3fr 1fr;
   }
   &__messages {
+    justify-self: center;
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+  &__profilecard{
+    justify-self: center;
   }
 }

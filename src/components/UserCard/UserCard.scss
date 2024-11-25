@@ -1,0 +1,30 @@
+.userCard{
+    cursor: pointer;
+    &__container{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    &__avatar{
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    &__info{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        &-name{
+            font-size: 20px;
+        }
+        &-username{
+            font-size: 16px;
+            color: #748290;
+        }
+    }
+    &:hover{
+        background: #18222b;
+        border-radius: 30px;
+    }
+}
