@@ -13,7 +13,7 @@ const Navigation = () => {
         <ul className="navigation__list">
           <li className="">
             <NavLink
-              to="/"
+              to="/profile"
               className={({ isActive }) =>
                 isActive
                   ? "navigation__list-item active"

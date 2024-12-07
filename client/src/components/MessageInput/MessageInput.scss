@@ -8,6 +8,11 @@
     display: flex;
     gap: 20px;
   }
+  &__form {
+   
+    display: flex;
+    gap: 20px;
+  }
   &__avatar {
     width: 60px;
     height: 60px;
@@ -15,10 +20,25 @@
     object-fit: cover;
   }
   &__input {
-    flex-grow: 1;
+    width: 900px;
     background: #28343e;
     border-radius: 20px;
     padding: 0 20px;
     height: 60px;
+    &::placeholder {
+      color: #46535e;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+  &__btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    background: #28343e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
   }
 }

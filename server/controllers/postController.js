@@ -3,11 +3,11 @@ const { User, Post, Favorite } = require("../models/index");
 class PostController {
   async create(req, res) {
     try {
-      const { description, nikname, username } = req.body;
+      const { description, nickname, username } = req.body;
       const post = await Post.create({
         user_id: req.user.id,
         description,
-        nikname,
+        nickname,
         username,
       });
       return res.json(post);

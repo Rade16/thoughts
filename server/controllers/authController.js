@@ -115,6 +115,53 @@ class authController {
       res.status(500).json({ message: "Ошибка при получении пользователей" });
     }
   }
+
+  async updateProfile(req, res) {
+    try {
+      console.log("Полученные данные:", req.body, "id");
+      const { username, nickname, bio } = req.body;
+      const userId = req.params.id; 
+
+  
+      if (!username && !nickname && !bio) {
+        return res
+          .status(400)
+          .json({
+            message: "Нужно передать хотя бы одно поле для обновления.",
+          });
+      }
+
+      if (nickname) {
+        const existingNickname = await User.findOne({ where: { nickname } });
+        if (existingNickname) {
+          return res.status(400).json({ message: "Этот никнейм уже занят." });
+        }
+      }
+
+     
+      if (username) {
+        const existingUsername = await User.findOne({ where: { username } });
+        if (existingUsername) {
+          return res.status(400).json({ message: "Это имя уже занято." });
+        }
+      }
+
+  
+      const updatedUser = await User.update(
+        { username, nickname, bio }, 
+        { where: { id: userId } }
+      );
+
+      if (updatedUser[0] === 0) {
+        return res.status(404).json({ message: "Пользователь не найден" });
+      }
+
+      return res.json({ message: "Данные пользователя успешно обновлены" });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Ошибка при обновлении данных" });
+    }
+  }
 }
 
 module.exports = new authController();

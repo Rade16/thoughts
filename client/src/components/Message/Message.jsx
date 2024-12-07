@@ -1,18 +1,18 @@
 import React from "react";
 import "./Message.scss";
 import avatar from "../../assets/avatar.jpg";
-const Message = () => {
+const Message = (obj) => {
   return (
     <div className="message">
       <div className="message__container">
         <img src={avatar} alt="" className="message__avatar" />
         <div className="message__content">
           <div className="message__content-user">
-            <div className="message__content-name">Роберт</div>
-            <div className="message__content-username">@kayaflower</div>
+            <div className="message__content-name">{obj.username}</div>
+            <div className="message__content-username">@{obj.nickname}</div>
           </div>
           <div className="message__content-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quod
+            {obj.description}
           </div>
         </div>
       </div>

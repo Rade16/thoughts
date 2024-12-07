@@ -1,0 +1,85 @@
+.profileEdit{
+    &__container{
+        padding: 25px;
+        width: 1165px;
+       
+        margin: 0 auto;
+        background: #1B2730;
+        border-radius: 30px;
+        padding: auto;
+    }
+
+    &__user{
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+        margin-top: 50px;
+
+        background: #1B2730;
+        border-radius: 15px;
+        display: flex;
+        gap: 15px;
+        &-avatar{
+            cursor: pointer;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+            width: 200px;
+            height: 200px;
+            background: #D9D9D9;
+            border-radius: 30px;
+            &-input{
+                display: none;
+            }
+        }
+        &-inputs{
+            display: flex;
+            
+            flex-direction: column;
+            gap: 10px;
+            &-line{
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+            &-input{
+                background: #28343E;
+                padding: 0 15px;
+                border-radius: 15px;
+                width: 265px;
+                height: 45px;
+                display: block;
+                &::placeholder{
+                    color: #46535E;
+                    font-weight: bold;
+                }
+            }
+        }
+        &-bio{
+            display: block;
+            width: 555px;
+            height: 145px;
+            background: #28343E;
+            border-radius: 15px;
+            padding: 10px;
+            resize: none;
+
+            &-label{
+                display: block;
+                font-size: 20px;
+                margin-bottom: 5px;
+                margin-top: 5px;
+            }
+        }
+        &-btn{
+            cursor: pointer;
+            width: 250px;
+            height: 45px;
+            background: #1D8ACE;
+            border-radius: 15px;
+            margin-top: 30px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+}
