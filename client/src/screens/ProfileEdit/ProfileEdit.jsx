@@ -9,6 +9,9 @@ const ProfileEdit = () => {
   const [username, setUsername] = useState("");
   const [nickname, setNickname] = useState("");
   const { user } = useAuth();
+  if (!user) {
+    return <p>Загрузка...</p>;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();

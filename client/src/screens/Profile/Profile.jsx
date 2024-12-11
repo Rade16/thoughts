@@ -9,6 +9,9 @@ import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 const Profile = () => {
   const { user } = useAuth();
+  if (!user) {
+    return <p>Загрузка...</p>;
+  }
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {

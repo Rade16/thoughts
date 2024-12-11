@@ -39,7 +39,6 @@ const App = () => {
   return <RouterProvider router={router} />;
 };
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -60,7 +59,7 @@ const router = createBrowserRouter([
   {
     path: "/profileEdit/:id",
     element: <ProfileEdit />,
-  }
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
