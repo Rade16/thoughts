@@ -3,7 +3,7 @@ const router = new Router();
 const controller = require("../controllers/postController");
 const authMiddleware = require("../middleware/authMiddleware");
 
-router.post("/create/:userId", authMiddleware, controller.create);
+router.post("/create/:id", authMiddleware, controller.create);
 router.post("/add-to-favorites", controller.addToFavorites);
 router.post(
   "/remove-from-favorites",
@@ -12,9 +12,9 @@ router.post(
 );
 router.get("/all-posts", controller.getAllPosts);
 
-router.get("/favorites/:userId", authMiddleware, controller.getFavoritePosts);
+router.get("/favorites/:id", authMiddleware, controller.getFavoritePosts);
 
-router.get("/my-posts/:userId", authMiddleware, controller.getMyPosts);
+router.get("/my-posts/:id", authMiddleware, controller.getMyPosts);
 
 router.get("/post/:id", controller.getPostById);
 

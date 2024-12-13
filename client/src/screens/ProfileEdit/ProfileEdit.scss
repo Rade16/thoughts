@@ -1,81 +1,87 @@
-.profileEdit{
-    &__container{
+.profileEdit {
+    &__container {
         padding: 25px;
         width: 1165px;
-       
+
         margin: 0 auto;
-        background: #1B2730;
+        background: #1b2730;
         border-radius: 30px;
         padding: auto;
     }
 
-    &__user{
+    &__user {
         display: flex;
         align-items: center;
         margin: 0 auto;
         margin-top: 50px;
 
-        background: #1B2730;
+        background: #1b2730;
         border-radius: 15px;
         display: flex;
         gap: 15px;
-        &-avatar{
+        &-avatar {
             cursor: pointer;
-           display: flex;
-           justify-content: center;
-           align-items: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 200px;
             height: 200px;
-            background: #D9D9D9;
+            background: #d9d9d9;
             border-radius: 30px;
-            &-input{
+            &-input {
                 display: none;
             }
+            &-img {
+                width: 200px;
+                height: 200px;
+                border-radius: 30px;
+                object-fit: cover;
+            }
         }
-        &-inputs{
+        &-inputs {
             display: flex;
-            
+
             flex-direction: column;
             gap: 10px;
-            &-line{
+            &-line {
                 display: flex;
                 flex-direction: column;
                 gap: 5px;
             }
-            &-input{
-                background: #28343E;
+            &-input {
+                background: #28343e;
                 padding: 0 15px;
                 border-radius: 15px;
                 width: 265px;
                 height: 45px;
                 display: block;
-                &::placeholder{
-                    color: #46535E;
+                &::placeholder {
+                    color: #46535e;
                     font-weight: bold;
                 }
             }
         }
-        &-bio{
+        &-bio {
             display: block;
             width: 555px;
             height: 145px;
-            background: #28343E;
+            background: #28343e;
             border-radius: 15px;
             padding: 10px;
             resize: none;
 
-            &-label{
+            &-label {
                 display: block;
                 font-size: 20px;
                 margin-bottom: 5px;
                 margin-top: 5px;
             }
         }
-        &-btn{
+        &-btn {
             cursor: pointer;
             width: 250px;
             height: 45px;
-            background: #1D8ACE;
+            background: #1d8ace;
             border-radius: 15px;
             margin-top: 30px;
             font-size: 20px;

@@ -116,50 +116,59 @@ class authController {
     }
   }
 
-  async updateProfile(req, res) {
+  async updateUser(req, res) {
     try {
-      console.log("Полученные данные:", req.body, "id");
+      console.log("Получен запрос на обновление:", req.params.id, req.body);
+      const { id } = req.params;
       const { username, nickname, bio } = req.body;
-      const userId = req.params.id; 
+      const avatar = req.file ? `/uploads/${req.file.filename}` : null;
 
-  
-      if (!username && !nickname && !bio) {
-        return res
-          .status(400)
-          .json({
-            message: "Нужно передать хотя бы одно поле для обновления.",
-          });
-      }
+      const user = await User.findByPk(id);
 
-      if (nickname) {
-        const existingNickname = await User.findOne({ where: { nickname } });
-        if (existingNickname) {
-          return res.status(400).json({ message: "Этот никнейм уже занят." });
-        }
-      }
-
-     
-      if (username) {
-        const existingUsername = await User.findOne({ where: { username } });
-        if (existingUsername) {
-          return res.status(400).json({ message: "Это имя уже занято." });
-        }
-      }
-
-  
-      const updatedUser = await User.update(
-        { username, nickname, bio }, 
-        { where: { id: userId } }
-      );
-
-      if (updatedUser[0] === 0) {
+      if (!user) {
         return res.status(404).json({ message: "Пользователь не найден" });
       }
 
-      return res.json({ message: "Данные пользователя успешно обновлены" });
+      if (username && username.trim() !== "" && username !== user.username) {
+        const existingUsername = await User.findOne({ where: { username } });
+        if (existingUsername) {
+          return res.status(400).json({ message: "Имя пользователя занято" });
+        }
+        user.username = username;
+      }
+
+      if (nickname && nickname.trim() !== "" && nickname !== user.nickname) {
+        user.nickname = nickname;
+      }
+
+      if (bio && bio.trim() !== "") {
+        user.bio = bio;
+      }
+
+      if (avatar) {
+        user.avatar = avatar;
+      }
+
+      await user.save();
+
+      return res.json({ message: "Пользователь успешно обновлен" });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ message: "Ошибка при обновлении данных" });
+      console.error("Error in updateUser:", error);
+      return res.status(500).json({ message: "Internal server error", error });
+    }
+  }
+
+  async getUser(req, res) {
+    try {
+      const id = req.params.id;
+      const user = await User.findByPk(id);
+      if (!user) {
+        return res.status(404).json({ message: "Пользователь не найден" });
+      }
+      return res.json(user);
+    } catch (e) {
+      console.log(e);
+      res.status(500).json({ message: "Ошибка при получении пользователя" });
     }
   }
 }

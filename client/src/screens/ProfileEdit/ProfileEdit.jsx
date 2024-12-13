@@ -5,24 +5,33 @@ import avatar from "../../assets/avatar.svg";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 const ProfileEdit = () => {
-  const [bio, setBio] = useState("");
-  const [username, setUsername] = useState("");
-  const [nickname, setNickname] = useState("");
   const { user } = useAuth();
   if (!user) {
     return <p>Загрузка...</p>;
   }
 
+  const [bio, setBio] = useState("");
+  const [username, setUsername] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [avatar, setAvatar] = useState(null);
+
+  const formData = new FormData();
+  if (avatar) {
+    formData.append("avatar", avatar);
+  }
+  formData.append("username", username);
+  formData.append("nickname", nickname);
+  formData.append("bio", bio);
+
+  const handleAvatarChange = (e) => {
+    setAvatar(e.target.files[0]);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.put(
         `http://localhost:5000/api/auth/update-profile/${user.id}`,
-        {
-          username,
-          nickname,
-          bio,
-        }
+        formData
       );
       console.log(response.data);
     } catch (error) {
@@ -36,9 +45,19 @@ const ProfileEdit = () => {
       <div className="profileEdit__container">
         <form action="" onSubmit={handleSubmit}>
           <div className="profileEdit__user">
-            <label htmlFor="" className="profileEdit__user-avatar">
-              <input type="file" className="profileEdit__user-avatar-input" />
-              <img src={avatar} alt="" />
+            <label htmlFor="file" className="profileEdit__user-avatar">
+              <input
+                type="file"
+                accept="image/*"
+                id="file"
+                onChange={handleAvatarChange}
+                className="profileEdit__user-avatar-input"
+              />
+              <img
+                src={`http://localhost:5000${user.avatar}`}
+                alt=""
+                className="profileEdit__user-avatar-img"
+              />
             </label>
             <div className="profileEdit__user-inputs">
               <div className="profileEdit__user-inputs-line">

@@ -5,7 +5,13 @@ import profile from "../../assets/navigation/profile.svg";
 import list from "../../assets/navigation/list.svg";
 
 import { NavLink } from "react-router-dom";
+
+import { useAuth } from "../../context/AuthContext";
 const Navigation = () => {
+  const { user } = useAuth();
+  if (!user) {
+    return <p>Загрузка...</p>;
+  }
   return (
     <div className="navigation">
       <div className="navigation__container">
@@ -13,7 +19,7 @@ const Navigation = () => {
         <ul className="navigation__list">
           <li className="">
             <NavLink
-              to="/profile"
+              to={`/profile/${user.id}`}
               className={({ isActive }) =>
                 isActive
                   ? "navigation__list-item active"

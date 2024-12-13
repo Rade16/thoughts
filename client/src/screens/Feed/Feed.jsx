@@ -7,7 +7,7 @@ import MessageInput from "../../components/MessageInput/MessageInput";
 import Recommendations from "../../components/Recommendations/Recommendations";
 import axios from "axios";
 const Feed = () => {
-  const [recipes, setRecipes] = useState([]);
+  const [messages, setRecipes] = useState([]);
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -26,21 +26,24 @@ const Feed = () => {
       setRecipes(response.data);
     };
     fetchRecipes();
-  }, []);
+  }, [messages]);
   return (
     <div className="feed">
       <Navigation />
       <div className="feed__container">
         <div className=""></div>
         <div className="feed__messages">
-          {recipes
+          <MessageInput />
+          {messages
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-            .map((recipe) => (
+            .map((message) => (
               <Message
-                key={recipe.id}
-                username={recipe.username}
-                nickname={recipe.nickname}
-                description={recipe.description}
+                key={message.id}
+                userId={message.user_id}
+                avatar={message.user.avatar}
+                username={message.user.username}
+                nickname={message.user.nickname}
+                message={message.message}
               />
             ))}
         </div>

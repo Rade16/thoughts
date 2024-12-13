@@ -3,12 +3,10 @@ const { User, Post, Favorite } = require("../models/index");
 class PostController {
   async create(req, res) {
     try {
-      const { description, nickname, username } = req.body;
+      const { message } = req.body;
       const post = await Post.create({
         user_id: req.user.id,
-        description,
-        nickname,
-        username,
+        message,
       });
       return res.json(post);
     } catch (e) {
@@ -60,7 +58,15 @@ class PostController {
 
   async getAllPosts(req, res) {
     try {
-      const posts = await Post.findAll();
+      const posts = await Post.findAll({
+        include: [
+          {
+            model: User,
+            attributes: ["username", "nickname", "avatar"],
+          },
+        ],
+        order: [["createdAt", "DESC"]],
+      });
       return res.json(posts);
     } catch (e) {
       console.log(e);
@@ -69,10 +75,24 @@ class PostController {
 
   async getMyPosts(req, res) {
     try {
-      const posts = await Post.findAll({ where: { user_id: req.user.id } });
+      console.log("ID пользователя:", req.params.id);
+      const posts = await Post.findAll({
+        where: { user_id: req.params.id },
+        include: [
+          {
+            model: User,
+            attributes: ["username", "nickname", "avatar"],
+          },
+        ],
+        order: [["createdAt", "DESC"]],
+      });
+
+      console.log("Полученные сообщения с включённым User:", posts);
+
       return res.json(posts);
     } catch (e) {
-      console.log(e);
+      console.log("Ошибка при получении данных:", e);
+      res.status(500).json({ error: "Ошибка при загрузке данных" });
     }
   }
 

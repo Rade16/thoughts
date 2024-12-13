@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const sequelize = require("./db");
 const router = require("./routes/index");
 const { User, Post, Favorite } = require("./models/index");
+const path = require("path");
 
 const PORT = process.env.PORT || 5000;
 
@@ -12,7 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -23,6 +24,7 @@ app.options("*", cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api", router);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 const start = async () => {
   try {
     await sequelize.authenticate();
