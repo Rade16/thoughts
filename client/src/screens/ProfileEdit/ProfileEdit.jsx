@@ -14,6 +14,7 @@ const ProfileEdit = () => {
   const [username, setUsername] = useState("");
   const [nickname, setNickname] = useState("");
   const [avatar, setAvatar] = useState(null);
+  const [previewAvatar, setPreviewAvatar] = useState("");
 
   const formData = new FormData();
   if (avatar) {
@@ -25,6 +26,8 @@ const ProfileEdit = () => {
 
   const handleAvatarChange = (e) => {
     setAvatar(e.target.files[0]);
+    const file = e.target.files[0];
+    setPreviewAvatar(URL.createObjectURL(file));
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +57,7 @@ const ProfileEdit = () => {
                 className="profileEdit__user-avatar-input"
               />
               <img
-                src={`http://localhost:5000${user.avatar}`}
+                src={previewAvatar || `http://localhost:5000${user.avatar}`}
                 alt=""
                 className="profileEdit__user-avatar-img"
               />

@@ -15,12 +15,15 @@ class authController {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res
-          .status(400)
-          .json({ message: "Ошибка при регистрации", errors });
+        return res.status(400).json({
+          message: "Ошибка при регистрации",
+          errors: errors.array().map((error) => error.msg),
+        });
       }
 
       const { nickname, username, password, email } = req.body;
+
+      const normalizedEmail = email.toLowerCase();
 
       const candidateByUsername = await User.findOne({ where: { nickname } });
       if (candidateByUsername) {
@@ -29,20 +32,21 @@ class authController {
           .json({ message: "Пользователь с таким именем уже существует" });
       }
 
-      const candidateByEmail = await User.findOne({ where: { email } });
+      const candidateByEmail = await User.findOne({
+        where: { email: normalizedEmail },
+      });
       if (candidateByEmail) {
         return res
           .status(400)
           .json({ message: "Пользователь с таким email уже существует" });
       }
-
       const hashPassword = bcrypt.hashSync(password, 7);
 
       const user = await User.create({
         nickname,
         username,
         password: hashPassword,
-        email,
+        email: normalizedEmail,
       });
 
       return res.json({ message: "Пользователь успешно зарегистрирован" });
@@ -57,7 +61,8 @@ class authController {
     try {
       const { email, password } = req.body;
 
-      const user = await User.findOne({ where: { email } });
+      const normalizedEmail = email.toLowerCase();
+      const user = await User.findOne({ where: { email: normalizedEmail } });
       if (!user) {
         return res
           .status(400)

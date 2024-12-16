@@ -39,6 +39,7 @@ const Login = () => {
       setUser(userResponse.data.user);
       navigate("/profile/" + userResponse.data.user.id);
     } catch (e) {
+      alert(e.response.data.message);
       setError("Ошибка входа: неверный email или пароль");
     }
   };
