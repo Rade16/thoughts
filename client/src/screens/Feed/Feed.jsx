@@ -6,7 +6,12 @@ import Message from "../../components/Message/Message";
 import MessageInput from "../../components/MessageInput/MessageInput";
 import Recommendations from "../../components/Recommendations/Recommendations";
 import axios from "axios";
+import { useAuth } from "../../context/AuthContext";
 const Feed = () => {
+  const { user } = useAuth();
+  if (!user) {
+    return <p>Загрузка...</p>;
+  }
   const [messages, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -26,7 +31,7 @@ const Feed = () => {
       setRecipes(response.data);
     };
     fetchRecipes();
-  }, [messages]);
+  }, []);
   return (
     <div className="feed">
       <Navigation />
